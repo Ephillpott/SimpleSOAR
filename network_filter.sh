@@ -9,7 +9,7 @@ LOG_FILE="/var/log/syslog"
 # Log file for blocked IPs
 BLOCK_LOG="/var/log/blocked_ips.log"
 
-# Function to block an IP address
+# Block an IP address
 block_ip() {
   IP_ADDRESS=$1
   iptables -A INPUT -s $IP_ADDRESS -j DROP
@@ -19,7 +19,7 @@ block_ip() {
 
 # Monitor the log file for connections
 tail -f $LOG_FILE | while read LINE; do
-  # Extract the IP address (you might need to adjust this based on your log format)
+  # Extract the IP address
   IP_ADDRESS=$(echo $LINE | awk '{print $5}') 
 
   # Get the country code for the IP address using GeoIP
